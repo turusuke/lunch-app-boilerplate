@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { counter } from './lib/counter'
-import { initialState as counterInitialState } from "./lib/counter";
+import {counter, initialState} from './lib/counter'
+import { initialState as counterInitialState } from './lib/counter'
 
-export const initializeStore = (preloadedState = counterInitialState) => {
+const initialStates = {
+  counter: counterInitialState
+}
+
+export const initializeStore = (preloadedState = initialStates) => {
   return configureStore({
-    reducer: counter,
-    preloadedState,
+    reducer: {
+      counter
+    },
+    preloadedState
   })
 }
