@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {counter, initialState} from './lib/counter'
-import { initialState as counterInitialState } from './lib/counter'
+import { counterSlice, initialState as counterInitialState } from './lib/counter'
 
 const initialStates = {
   counter: counterInitialState
@@ -9,7 +8,7 @@ const initialStates = {
 export const initializeStore = (preloadedState = initialStates) => {
   return configureStore({
     reducer: {
-      counter
+      counter: counterSlice.reducer
     },
     preloadedState
   })

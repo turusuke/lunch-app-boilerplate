@@ -1,21 +1,13 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { counterSlice } from '../lib/counter'
 
 const useCounter = () => {
   const count = useSelector(state => state.counter)
   const dispatch = useDispatch()
-  const increment = () =>
-    dispatch({
-      type: 'INCREMENT'
-    })
-  const decrement = () =>
-    dispatch({
-      type: 'DECREMENT'
-    })
-  const reset = () =>
-    dispatch({
-      type: 'RESET'
-    })
+  const increment = () => dispatch(counterSlice.actions.increment())
+  const decrement = () => dispatch(counterSlice.actions.decrement())
+  const reset = () => dispatch(counterSlice.actions.reset())
   return { count, increment, decrement, reset }
 }
 
