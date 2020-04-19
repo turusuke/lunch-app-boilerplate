@@ -1,14 +1,20 @@
-import { createSlice, createAction, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import ky from 'ky-universal'
 
-export const initialState = 0 as any
+export const initialState = 0
+
+interface Todo {
+  userId: number,
+  id: number,
+  title: string,
+  completed: boolean
+}
 
 export const fetchTodoThunk = createAsyncThunk(
   'users/fetchTodo',
   async () => {
     const response = await ky.get('https://jsonplaceholder.typicode.com/todos/1').json()
-    console.log(response);
-    return response
+    return response as Todo
   }
 )
 
@@ -21,9 +27,9 @@ export const counterSlice = createSlice({
     decrement: state => state - 1,
     reset: state => initialState
   },
-  extraReducers: {
-    [fetchTodoThunk.fulfilled]: ({ state, action }) => {
-      console.log(state)
-    }
+  extraReducers: (builder) => {
+    builder.addCase(fetchTodoThunk.fulfilled, (state, action) => {
+      console.log(action);
+    })
   }
 })
