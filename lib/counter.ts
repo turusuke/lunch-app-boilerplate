@@ -13,8 +13,8 @@ interface Todo {
 export const fetchTodoThunk = createAsyncThunk(
   'users/fetchTodo',
   async () => {
-    const response = await ky.get('https://jsonplaceholder.typicode.com/todos/1').json()
-    return response as Todo
+    const response = await ky.get('https://jsonplaceholder.typicode.com/todos/1').json<Todo>()
+    return response
   }
 )
 
@@ -29,7 +29,7 @@ export const counterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchTodoThunk.fulfilled, (state, action) => {
-      console.log(action);
+      console.log(state);
     })
   }
 })
